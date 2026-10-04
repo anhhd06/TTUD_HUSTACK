@@ -5,23 +5,14 @@ map<string,int> numErrOfUser;
 map<string, map<string,int > > PointOfProblem;
 vector <string> Time;
 
-
-int TimeCall(string ftime,string etime){
-    int seconds = 0 ;
-    seconds += 3600* ( stoi(etime.substr(0,2)) - stoi(ftime.substr(0,2)) );
-    seconds += 60 * ( stoi(etime.substr(3,2)) - stoi(ftime.substr(3,2)) );
-    seconds += stoi(etime.substr(6,2)) - stoi(ftime.substr(6,2));
-    return seconds;
+void numSubInTime(string from,string to){
+    int count;
+    auto it_start = lower_bound(Time.begin(),Time.end(),from);
+    auto it_end = upper_bound(Time.begin(),Time.end(),to);
+    count = distance(it_start,it_end);
+    cout<< count << endl;
 }
 
-
-void numSubInTime(string start,string end){
-    int count = 0;
-    for(int i=0;i<Time.size();i++){
-        if(TimeCall(start,Time[i]) >= 0 && TimeCall(Time[i],end) >= 0) count ++;
-    }
-    cout << count << endl;
-}
 
 void totalPoint(string UserID){
     int total = 0;
@@ -73,6 +64,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     input();
+    sort(Time.begin(),Time.end());
     solve();
 
 }
